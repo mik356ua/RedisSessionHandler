@@ -124,7 +124,11 @@ class RedisSessionHandler extends \SessionHandler
      */
     public function create_sid()
     {
-        $id = parent::create_sid();
+        if (is_callable(array('parent', 'create_sid'))) {
+            $id = parent::create_sid();
+        } else {
+            $id = session_id();
+        }
 
         $this->new_sessions[$id] = true;
 
