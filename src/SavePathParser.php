@@ -32,12 +32,12 @@ class SavePathParser
      */
     const DEFAULT_DATABASE = 0;
 
-    const DEFAULT_OPTIONS = [
+    const DEFAULT_OPTIONS = array(
         'timeout' => self::DEFAULT_TIMEOUT,
         'prefix' => self::DEFAULT_PREFIX,
         'auth' => self::DEFAULT_AUTH,
         'database' => self::DEFAULT_DATABASE
-    ];
+    );
 
     /**
      * @param string $path The session.save_path parameter from php.ini
@@ -57,7 +57,7 @@ class SavePathParser
         $port = isset($parsed_path['port']) ?
             $parsed_path['port'] : static::DEFAULT_PORT;
 
-        $opts = [];
+        $opts = array();
 
         if (isset($parsed_path['query'])) {
             parse_str($parsed_path['query'], $opts);
@@ -65,8 +65,8 @@ class SavePathParser
 
         $opts = array_merge(static::DEFAULT_OPTIONS, $opts);
 
-        return [
+        return array(
             $host, $port, (float) $opts['timeout'], $opts['prefix'], $opts['auth'], (int) $opts['database']
-        ];
+        );
     }
 }
