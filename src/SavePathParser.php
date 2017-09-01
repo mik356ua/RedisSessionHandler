@@ -32,11 +32,11 @@ class SavePathParser
      */
     const DEFAULT_DATABASE = 0;
 
-    const DEFAULT_OPTIONS = array(
+    public static $DEFAULT_OPTIONS = array(
+        'database' => self::DEFAULT_DATABASE,
         'timeout' => self::DEFAULT_TIMEOUT,
         'prefix' => self::DEFAULT_PREFIX,
         'auth' => self::DEFAULT_AUTH,
-        'database' => self::DEFAULT_DATABASE
     );
 
     /**
@@ -63,7 +63,7 @@ class SavePathParser
             parse_str($parsed_path['query'], $opts);
         }
 
-        $opts = array_merge(static::DEFAULT_OPTIONS, $opts);
+        $opts = array_merge(static::$DEFAULT_OPTIONS, $opts);
 
         return array(
             $host, $port, (float) $opts['timeout'], $opts['prefix'], $opts['auth'], (int) $opts['database']
